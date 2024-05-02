@@ -17,7 +17,7 @@ public class PopUpController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputController.Instance.OnMenuEventPerformed += Open;
+        InputController.Instance.OnMenuEventStarted += Open;
 
         GameEventController.Instance.GameEvents.OnEnemyKilledEvent += WinPopUp;
         GameEventController.Instance.GameEvents.OnPlayerKilledEvent += LosePopUp;
@@ -28,7 +28,7 @@ public class PopUpController : MonoBehaviour
 
     private void OnDisable()
     {
-        InputController.Instance.OnMenuEventPerformed -= Open;
+        InputController.Instance.OnMenuEventStarted -= Open;
 
         GameEventController.Instance.GameEvents.OnEnemyKilledEvent -= WinPopUp;
         GameEventController.Instance.GameEvents.OnPlayerKilledEvent -= LosePopUp;
@@ -39,7 +39,7 @@ public class PopUpController : MonoBehaviour
 
     private void Open()
     {
-        _container.SetActive(!_container.activeSelf);
+        _container.SetActive(!_container.gameObject.activeSelf);
 
         if(_container.activeSelf == true)
         {
@@ -50,7 +50,8 @@ public class PopUpController : MonoBehaviour
             _gameController.CursorVisible(false);
         }
 
-        _score.text = $"wins: {ScoreController.Instance.GetScoreData().Wins} losses: {ScoreController.Instance.GetScoreData().Losses}";
+        _score.text = $"wins: {ScoreController.Instance.GetScoreData().Wins} " +
+            $"\n losses: {ScoreController.Instance.GetScoreData().Losses}";
     }
 
     private void LosePopUp()
@@ -60,7 +61,7 @@ public class PopUpController : MonoBehaviour
 
         Open();
 
-        InputController.Instance.OnMenuEventPerformed -= Open;
+        InputController.Instance.OnMenuEventStarted -= Open;
     }
 
     private void WinPopUp()
@@ -70,7 +71,7 @@ public class PopUpController : MonoBehaviour
 
         Open();
 
-        InputController.Instance.OnMenuEventPerformed -= Open;
+        InputController.Instance.OnMenuEventStarted -= Open;
     }
 
     private void Menu()

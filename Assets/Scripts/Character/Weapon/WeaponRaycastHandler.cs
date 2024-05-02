@@ -49,7 +49,6 @@ public class WeaponRaycastHandler : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("DAMAGEABLE object not found!");
                     AttackIsNotTargetFound(fireHit);
                 }
             }

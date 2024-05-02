@@ -48,7 +48,7 @@ public class InputController : MonoBehaviour
         InputActions.Character.Weapon_2.performed += Weapon2;
         InputActions.Character.Weapon_3.performed += Weapon3;
 
-        InputActions.Character.Menu.performed += Menu;
+        InputActions.Character.Menu.started += Menu;
 
     }
 
@@ -74,7 +74,7 @@ public class InputController : MonoBehaviour
         InputActions.Character.Weapon_2.performed -= Weapon2;
         InputActions.Character.Weapon_3.performed -= Weapon3;
 
-        InputActions.Character.Menu.performed -= Menu;
+        InputActions.Character.Menu.started -= Menu;
 
     }
 
@@ -184,10 +184,10 @@ public class InputController : MonoBehaviour
     #endregion
 
     #region Actions
-    public event Action OnMenuEventPerformed;
+    public event Action OnMenuEventStarted;
     private void Menu(InputAction.CallbackContext context)
     {
-        OnMenuEventPerformed?.Invoke();
+        OnMenuEventStarted?.Invoke();
     }
 
     #endregion
